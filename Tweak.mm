@@ -19,7 +19,7 @@ static Nucleus *nuke;
 //Set the textColor arg to red
 textColor = [UIColor redColor];
 	//Get original IMP from Nucleus.originals
- IMP orig = [nuke originalForSEL:@selector(textColor:) inClass:@"UILabel"];
+ IMP orig = [nuke originalForSEL:@selector(setTextColor:) inClass:@"UILabel"];
 	//Run original IMP
 	orig(self,_cmd, textColor);
 }
