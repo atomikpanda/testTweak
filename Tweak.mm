@@ -1,10 +1,13 @@
 #import <UIKit/UIKit.h>
-#define NUDebug
 #import <Nucleus/Nucleus.h>
+
+static Nucleus *nucleus;
 
 __attribute__((constructor))
 static void initialize() {
-    [Nucleus initClasses:@[@"UILabelHooks"]];
+    nucleus = [[Nucleus alloc] init];
+    nucleus.debug = YES;
+    [nucleus initClasses:@[@"UILabelHooks"]];
 }
 
 @interface UILabelHooks : NSObject
@@ -15,7 +18,7 @@ static void initialize() {
 
 @implementation UILabelHooks
 -(void)Nucleus {
-    [Nucleus hook:@selector(setText:) inClass:@"UILabel" fromClass:@"UILabelHooks"];
+    [nucleus hook:@selector(setText:) inClass:@"UILabel" fromClass:@"UILabelHooks"];
 }
 -(void)setText:(NSString*)text {
     [self orig_setText:[text stringByAppendingString:@"--WORKS!"]];
